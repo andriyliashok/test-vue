@@ -1,19 +1,34 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!--<app-progress-form></app-progress-form>-->
+    <div class="container">
+      <app-cart></app-cart>
+      <app-product></app-product>
+    </div>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import AppProgressForm from './components/AppProgressForm'
+import AppProduct from './components/AppProduct'
+import AppCart from './components/AppCart'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
-  }
-}
+    // AppProgressForm,
+    AppProduct,
+    AppCart,
+  },
+  data() {
+    return {
+      count: 0,
+    };
+  },
+  methods: {},
+};
 </script>
 
 <style>
