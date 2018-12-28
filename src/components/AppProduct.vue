@@ -14,7 +14,7 @@
       </div>
       <div class="collection-item">
         <button class="waves-effect waves-light btn"
-                @click="sendData()"
+                @click="onOrder"
                 :disabled="isdisabled"
         >Order now</button>
       </div>
@@ -23,11 +23,12 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters, mapActions } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     ...mapGetters([
@@ -43,9 +44,12 @@ export default {
       'incrementProduct',
       'decrementProduct',
     ]),
-    ...mapActions([
-      'sendData',
-    ]),
+    onOrder() {
+      this.$store.dispatch('sendData', {
+        name: this.name,
+        phone: this.phone,
+      });
+    },
   },
 };
 </script>
