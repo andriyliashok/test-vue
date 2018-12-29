@@ -1,16 +1,23 @@
 <template>
   <div class="container">
     <h1>My site</h1>
-    <h5>Hello greeting</h5>
+    <h5 v-if="formSubmited">Hello {{info[0].value}}</h5>
     <hr>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters([
+      'info',
+      'formSubmited',
+    ]),
   },
 };
 </script>

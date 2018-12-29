@@ -50,7 +50,7 @@ export const store = new Vuex.Store({
     info(state) {
       return state.info;
     },
-    filledField() {
+    filledField(state) {
       let done = 0;
       for (let i = 0; i < state.info.length; i += 1) {
         if (state.info[i].status) done += 1;
@@ -85,7 +85,13 @@ export const store = new Vuex.Store({
       state.info[payload.index].value = payload.value;
     },
     setInfoStatus(state, payload) {
-      state.info[payload.index].status = payload.status;
+      state.info[payload.index].status = payload.isValid;
+    },
+    formProccess(state) {
+      state.formProccess = true;
+    },
+    formSubmited(state) {
+      state.formSubmited = !state.formSubmited;
     },
   },
   actions: {
@@ -95,6 +101,13 @@ export const store = new Vuex.Store({
       setTimeout(() => {
         store.commit('orderedDone');
       }, 1000);
+    },
+    formSubmit(store) {
+      store.commit('formProccess');
+
+      setTimeout(() => {
+        store.commit('formSubmited');
+      }, 3000);
     },
   },
 });

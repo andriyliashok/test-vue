@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <div class="progress">
-      <div class="determinate"></div>
-    </div>
-    <div class="row">
-      <form class="col s12">
+    <form @submit.prevent="sendData" v-if="!formSubmited">
+      <div class="progress">
+        <div class="determinate" :style="progressWidth()"></div>
+      </div>
+      <div class="row">
         <div class="row">
           <app-input v-for="(item, index) in info"
                      :name="item.name"
@@ -17,27 +17,23 @@
         </div>
         <div class="row">
           <button class="waves-effect waves-light btn">
-            Send data
+            <span v-if="!formProccess">Send data</span>
+            <span v-if="formProccess">Pending...</span>
           </button>
         </div>
-      </form>
-      <div>
-        <div class="row">
-          <table>
-            <tbody>
-            <tr v-for="(item, index) in info"
-                :key="index">
-              <td><b>{{item.name}}</b></td>
-              <td>{{item.value}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="row">
-          <button type="button" class="waves-effect waves-light btn">
-            Back
-          </button>
-        </div>
+      </div>
+    </form>
+    <div v-else>
+      <div class="row">
+        <table>
+          <tbody>
+          <tr v-for="(item, index) in info"
+              :key="index">
+            <td><b>{{item.name}}</b></td>
+            <td>{{item.value}}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <br>
@@ -61,6 +57,9 @@ export default {
   computed: {
     ...mapGetters([
       'info',
+      'filledField',
+      'formProccess',
+      'formSubmited',
     ]),
   },
   methods: {
@@ -75,6 +74,14 @@ export default {
         index,
         isValid,
       });
+    },
+    progressWidth() {
+      return {
+        width: `${(this.filledField / this.info.length * 100)}%`,
+      };
+    },
+    sendData() {
+      this.$store.dispatch('formSubmit');
     },
   },
 };
