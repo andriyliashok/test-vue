@@ -8,32 +8,7 @@ export const store = new Vuex.Store({
     count: 0,
     price: 20,
     ordered: null,
-    info: [
-      {
-        name: 'Name',
-        value: '',
-        pattern: /^[a-zA-Z]{2,30}$/,
-        status: false,
-      },
-      {
-        name: 'Phone',
-        value: '',
-        pattern: /^[0-9]{7,14}$/,
-        status: false,
-      },
-      {
-        name: 'Email',
-        value: '',
-        pattern: /.+/,
-        status: false,
-      },
-      {
-        name: 'Some Field',
-        value: '',
-        pattern: /.+/,
-        status: false,
-      },
-    ],
+    info: [],
     formProccess: false,
     formSubmited: false,
   },
