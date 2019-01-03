@@ -26,7 +26,7 @@
       <div class="item_bottom">
         <div class="bottom_left">
           <div class="date">{{date | moment("MM.DD.YY")}}</div>
-          <div class="time">18:30</div>
+          <div class="time">{{date | moment("h:mm")}}</div>
         </div>
         <div class="bottom_right"><a class="city" href="#">{{city}}</a></div>
       </div>
