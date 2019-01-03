@@ -9,7 +9,7 @@
         <div class="events_block">
           <paginate name="events"
                     :list="events"
-                    :per="16">
+                    :per="eventLength">
             <event-item v-for="event in paginated('events')"
                         :poster="event.poster_big"
                         :category="event.category"
