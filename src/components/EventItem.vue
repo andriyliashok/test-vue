@@ -1,10 +1,9 @@
 <template>
   <div class="b_events_block_item">
     <div class="img">
-      <a :style="`background-image: url('${event.poster_big}')`"
-         href="#"
-         class="img_wrapper"
-      ></a>
+      <a href="#">
+        <img class="img_wrapper" :src="event.poster_big" alt="">
+      </a>
       <a class="icon_like" href="#"></a>
     </div>
     <div class="item_content">
@@ -25,8 +24,8 @@
       </div>
       <div class="item_bottom">
         <div class="bottom_left">
-          <div class="date">{{event.when | moment("MM.DD.YY")}}</div>
-          <div class="time">{{event.when | moment("h:mm")}}</div>
+          <div class="date">{{ format(event.when, 'DD.MM.YY')}}</div>
+          <div class="time">{{ format(event.when, 'h:mm')}}</div>
         </div>
         <div class="bottom_right"><a class="city" href="#">{{event.city}}</a></div>
       </div>
@@ -35,8 +34,17 @@
 </template>
 
 <script>
+import { format } from 'date-fns';
+
 export default {
   name: 'event-item',
-  props: ['event'],
+  props: {
+    event: Object,
+  },
+  data() {
+    return {
+      format,
+    };
+  },
 };
 </script>

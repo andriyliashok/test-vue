@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-      <event-list></event-list>
+      <EventList
+          :limit="16"
+      ></EventList>
   </div>
 </template>
 

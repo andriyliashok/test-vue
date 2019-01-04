@@ -7,22 +7,24 @@
                     <div class="events_selected_category">
                         <label>Category:</label><span class="category_item">All</span>
                     </div>
-                    <div class="events_block" ref="layout">
-                        <event-item v-for="event in events"
-                                    :event="event"
-                                    :key="event.event_id">
-                        </event-item>
+                    <div v-if="total > 0" class="events_block">
+                        <EventItem
+                            v-for="event in events"
+                            :event="event"
+                            :key="event.event_id"
+                        ></EventItem>
                         <div class="events_bottom">
                             <div class="bottom_item"></div>
                             <div class="bottom_item">
-                                <pagination v-if="events.length && total > limit"
-                                            :limit="limit"
-                                            :total="total"
-                                            @getPaginationOffset="getPaginationOffset">
-                                </pagination>
+                                <Pagination
+                                    v-if="total > limit"
+                                    :options="{ limit, total }"
+                                    @paginationOffset="setPaginationOffset"
+                                ></Pagination>
                             </div>
                         </div>
                     </div>
+                    <h2 v-else>No events</h2>
                 </section>
             </div>
         </div>
@@ -39,6 +41,10 @@ const GetEventList = 'https://api.myjson.com/bins/hatho';
 
 export default {
   name: 'event-list',
+  props: {
+    limit: Number,
+    options: Object,
+  },
   components: {
     EventItem,
     Pagination,
@@ -46,7 +52,6 @@ export default {
   data() {
     return {
       events: [],
-      limit: 16,
       offset: 0,
       total: null,
     };
@@ -59,27 +64,22 @@ export default {
             params: {
               limit: this.limit,
               offset: this.offset,
+              ...this.options,
             },
           })
-        .then((response) => {
-          this.events = response.data.events;
-          this.total = response.data.total;
+        .then(({ data }) => {
+          this.events = data.events;
+          this.total = data.total;
         })
-        .catch((response) => {
-          console.log(response);
-        });
+        .catch(console.log);
     },
-    getPaginationOffset(offset) {
+    setPaginationOffset(offset) {
       this.offset = offset;
+      this.getEvents();
     },
   },
   created() {
     this.getEvents();
-  },
-  watch: {
-    offset() {
-      this.getEvents();
-    },
   },
 };
 </script>

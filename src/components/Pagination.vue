@@ -1,34 +1,32 @@
 <template>
-  <paginate :pageCount="paginationTotal"
-            :containerClass="'b_pagination'"
-            :prev-text="''"
-            :next-text="''"
-            :margin-pages="2"
-            :clickHandler="getPaginationOffset">
-  </paginate>
+  <paginate
+      :pageCount="paginationTotal"
+      :containerClass="'b_pagination'"
+      :margin-pages="2"
+      :clickHandler="paginationOffset"
+  ></paginate>
 </template>
 
 <script>
 export default {
   name: 'pagination',
-  props: ['limit', 'total'],
-  data() {
-    return {};
+  props: {
+    options: Object,
   },
   computed: {
     paginationTotal() {
-      return Math.ceil(+this.total / this.limit);
+      return Math.ceil(+this.options.total / this.options.limit);
     },
   },
   methods: {
-    getPaginationOffset(page) {
-      this.$emit('getPaginationOffset', (page * this.limit) - this.limit);
+    paginationOffset(page) {
+      this.$emit('paginationOffset', (page * this.options.limit) - this.options.limit);
     },
   },
 };
 </script>
 
-<style>
+<style lang="scss">
   .b_pagination li:first-child a,
   .b_pagination li:last-child a {
     width: 30px;
@@ -38,8 +36,8 @@ export default {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
+    font-size: 0;
   }
-
   .b_pagination li:first-child a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' id='SVGDoc' width='10' height='15' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 10 15'%3E%3Cdefs%3E%3Cpath d='M681.90156,3501.4l-6.9,-6.9l6.9,-6.9' id='Path-0'/%3E%3C/defs%3E%3Cg transform='matrix%281,0,0,1,-673,-3487%29'%3E%3Cg%3E%3Cuse xlink:href='%23Path-0' fill-opacity='0' fill='%23ffffff' stroke-dashoffset='0' stroke-linejoin='miter' stroke-linecap='butt' stroke-opacity='1' stroke='%23303a43' stroke-miterlimit='50' stroke-width='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
