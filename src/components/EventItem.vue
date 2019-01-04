@@ -1,34 +1,34 @@
 <template>
   <div class="b_events_block_item">
     <div class="img">
-      <a :style="`background-image: url('${poster}')`"
+      <a :style="`background-image: url('${event.poster_big}')`"
          href="#"
          class="img_wrapper"
       ></a>
       <a class="icon_like" href="#"></a>
     </div>
     <div class="item_content">
-      <div class="item_top"><a class="btn_category" href="#">{{category}}</a>
+      <div class="item_top"><a class="btn_category" href="#">{{event.category}}</a>
         <div class="item_price">free</div>
       </div>
-      <a class="_title" href="#">{{name}}</a>
+      <a class="_title" href="#">{{event.name}}</a>
       <div class="item_info">
         <div class="info_item">
-          <a href="#">visitors: <span>{{totalPeople}}</span></a>
+          <a href="#">visitors: <span>{{event.friends_count}}</span></a>
         </div>
         <div class="info_item">
-          <a href="#">from my city: <span>{{fromCityCount}}</span></a>
+          <a href="#">from my city: <span>{{event.friends_count}}</span></a>
         </div>
         <div class="info_item">
-          <a href="#">friends: <span>{{FriendsCount}}</span></a>
+          <a href="#">friends: <span>{{event.friends_count}}</span></a>
         </div>
       </div>
       <div class="item_bottom">
         <div class="bottom_left">
-          <div class="date">{{date | moment("MM.DD.YY")}}</div>
-          <div class="time">{{date | moment("h:mm")}}</div>
+          <div class="date">{{event.when | moment("MM.DD.YY")}}</div>
+          <div class="time">{{event.when | moment("h:mm")}}</div>
         </div>
-        <div class="bottom_right"><a class="city" href="#">{{city}}</a></div>
+        <div class="bottom_right"><a class="city" href="#">{{event.city}}</a></div>
       </div>
     </div>
   </div>
@@ -37,11 +37,6 @@
 <script>
 export default {
   name: 'event-item',
-  props: ['poster', 'category', 'name', 'totalPeople', 'fromCityCount', 'FriendsCount', 'date', 'city'],
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {},
+  props: ['event'],
 };
 </script>

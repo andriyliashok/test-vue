@@ -12,15 +12,5 @@ export default {
   components: {
     EventList,
   },
-  data() {
-    return {
-      count: 0,
-    };
-  },
-  methods: {},
 };
 </script>
-
-<style>
-
-</style>
