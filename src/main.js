@@ -1,11 +1,9 @@
 import Vue from 'vue';
+import Paginate from 'vuejs-paginate';
 import App from './App.vue';
 
-import { store } from './store/index';
-
-Vue.config.productionTip = false
-
+Vue.config.productionTip = false;
+Vue.component('paginate', Paginate);
 new Vue({
-  store,
   render: h => h(App),
-}).$mount('#app')
+}).$mount('#app');
